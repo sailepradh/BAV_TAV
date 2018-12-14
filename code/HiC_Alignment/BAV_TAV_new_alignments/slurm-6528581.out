@@ -1,0 +1,41 @@
+sample_name BAV2714EC
+base_file_name BAV2714EC
+Current directory is  /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles
+File Name	Total_reads_processed	Reads_too_short_to_map	%Reads_too_short_to_map	Unique_alignments	%Unique_alignments	Multiple_alignments	%Multiple_alignments	Failed_to_align	%failed_to_align	Paired	%Paired
+BAV2714EC/BAV2714EC_1.trunc.bam	5.35358e+08	5948	0.00111103	3.93064e+08	73.4208	1.28005e+08	23.9103	1.42825e+07	2.66785	2.64076e+08	49.327
+BAV2714EC/BAV2714EC_2.trunc.bam	5.35358e+08	15363	0.00286967	3.55938e+08	66.486	1.04421e+08	19.5048	7.4984e+07	14.0063	2.64076e+08	49.327
+Detecting R automatically
+Number of threads set to 1
+Found R at '/usr/bin/R'
+Filtering with HiCUP Filter v0.5.7
+Processing digest file /crex/proj/sllstore2017025/private/supplementaryFiles/Digest_hg19_MboI_None_11-39-03_22-01-2016.txt
+Sonication protocol followed - Restriction_Enzyme1:MboI [^GATC]
+Filtering /scratch/6528581/BAV2714EC.trunc.pair.bam
+Filtering complete
+Detecting R automatically
+Found R at '/usr/bin/R'
+Removing duplicates with HiCUP Deduplicator v0.5.7
+De-duplicating /scratch/6528581/BAV2714EC.trunc.filt.sam
+De-duplication complete
+[bam_sort_core] merging from 132 files...
+rm: cannot remove ‘/scratch/6528581/*.filt.bam’: No such file or directory
+rm: cannot remove ‘/scratch/6528581/*.trunc.bam’: No such file or directory
+rm: cannot remove ‘/scratch/6528581/*.fastq.gz’: No such file or directory
+rm: cannot remove ‘/scratch/6528581/*.fastq’: No such file or directory
+rm: cannot remove ‘/scratch/6528581/hg19.*’: No such file or directory
+
+
+Copying back the resulting analysis files at Thu  6 Dec 00:17:41 CET 2018
+sending incremental file list
+./
+BAV2714EC.trunc.dedup.sorted.bai
+BAV2714EC.trunc.dedup.sorted.bam
+BAV2714EC.trunc.ditag_size_distribution.svg
+BAV2714EC.trunc.filt.sam.deduplicator_cis_trans_piechart.svg
+BAV2714EC.trunc.filt.sam.deduplicator_uniques_barchart.svg
+BAV2714EC.trunc.pair.bam.filter_piechart.svg
+hicup_deduplicator_summary_18-06-15_05-12-2018.txt
+hicup_filter_summary_11-24-27_05-12-2018.txt
+
+sent 18,420,554,646 bytes  received 171 bytes  290,087,477.43 bytes/sec
+total size is 18,416,057,748  speedup is 1.00

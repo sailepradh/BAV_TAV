@@ -1,0 +1,42 @@
+
+Inactive Modules:
+  1) bowtie2/2.2.9  2) samtools/1.3
+
+sample_name TAV2515
+base_file_name TAV2515
+
+Activating Modules:
+  1) bowtie2/2.2.9  2) samtools/1.3
+
+Map with Bowtie 2 *.trunc.fastq.gz
+1130073568 reads; of these:
+  1130073568 (100.00%) were unpaired; of these:
+    41099330 (3.64%) aligned 0 times
+    760280879 (67.28%) aligned exactly 1 time
+    328693359 (29.09%) aligned >1 times
+96.36% overall alignment rate
+
+real	1330m50.047s
+user	11962m5.618s
+sys	1265m29.862s
+1130073568 reads; of these:
+  1130073568 (100.00%) were unpaired; of these:
+    62589055 (5.54%) aligned 0 times
+    746310578 (66.04%) aligned exactly 1 time
+    321173935 (28.42%) aligned >1 times
+94.46% overall alignment rate
+
+real	1357m21.118s
+user	12215m12.906s
+sys	1304m51.094s
+sending incremental file list
+sending incremental file list
+TAV2515_2.trunc.bam
+TAV2515_1.trunc.bam
+
+sent 71607235413 bytes  received 31 bytes  89453136.09 bytes/sec
+total size is 71598495269  speedup is 1.00
+
+sent 73452781746 bytes  received 31 bytes  91075984.84 bytes/sec
+total size is 73443816342  speedup is 1.00
+Submitted batch job 1875162

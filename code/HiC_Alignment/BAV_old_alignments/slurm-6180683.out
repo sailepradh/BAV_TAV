@@ -1,0 +1,12 @@
+sample_name BAV2424
+base_file_name BAV2424
+Created a directory within current directory  BAV2424
+Detecting R automatically
+Found R at '/usr/bin/R'
+Truncating with HiCUP Truncater v0.5.7
+Truncating sequences at occurrence of sequence 'GATCGATC'
+Truncating sequences
+Truncating /scratch/6180683/BAV2424_R2_001.fastq.gz
+Truncating /scratch/6180683/BAV2424_R1_001.fastq.gz
+Truncating complete
+Submitted batch job 6180971

@@ -1,0 +1,41 @@
+sample_name BAV2375
+base_file_name BAV2375
+Current directory is  /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles
+File Name	Total_reads_processed	Reads_too_short_to_map	%Reads_too_short_to_map	Unique_alignments	%Unique_alignments	Multiple_alignments	%Multiple_alignments	Failed_to_align	%failed_to_align	Paired	%Paired
+BAV2375/BAV2375_1.trunc.bam	1.3838e+09	13065	0.000944137	9.87954e+08	71.3941	3.68333e+08	26.6174	2.75032e+07	1.98751	7.16902e+08	51.8066
+BAV2375/BAV2375_2.trunc.bam	1.3838e+09	24267	0.00175364	9.72197e+08	70.2555	3.63753e+08	26.2865	4.78284e+07	3.4563	7.16902e+08	51.8066
+Detecting R automatically
+Number of threads set to 1
+Found R at '/usr/bin/R'
+Filtering with HiCUP Filter v0.5.7
+Processing digest file /crex/proj/sllstore2017025/private/supplementaryFiles/Digest_hg19_MboI_None_11-39-03_22-01-2016.txt
+Sonication protocol followed - Restriction_Enzyme1:MboI [^GATC]
+Filtering /scratch/6189710/BAV2375.trunc.pair.bam
+Filtering complete
+Detecting R automatically
+Found R at '/usr/bin/R'
+Removing duplicates with HiCUP Deduplicator v0.5.7
+De-duplicating /scratch/6189710/BAV2375.trunc.filt.sam
+De-duplication complete
+[bam_sort_core] merging from 306 files...
+rm: cannot remove ‘/scratch/6189710/*.filt.bam’: No such file or directory
+rm: cannot remove ‘/scratch/6189710/*.trunc.bam’: No such file or directory
+rm: cannot remove ‘/scratch/6189710/*.fastq.gz’: No such file or directory
+rm: cannot remove ‘/scratch/6189710/*.fastq’: No such file or directory
+rm: cannot remove ‘/scratch/6189710/hg19.*’: No such file or directory
+
+
+Copying back the resulting analysis files at Sat 17 Nov 21:40:07 CET 2018
+sending incremental file list
+./
+BAV2375.trunc.dedup.sorted.bai
+BAV2375.trunc.dedup.sorted.bam
+BAV2375.trunc.ditag_size_distribution.svg
+BAV2375.trunc.filt.sam.deduplicator_cis_trans_piechart.svg
+BAV2375.trunc.filt.sam.deduplicator_uniques_barchart.svg
+BAV2375.trunc.pair.bam.filter_piechart.svg
+hicup_deduplicator_summary_05-25-35_17-11-2018.txt
+hicup_filter_summary_11-22-29_16-11-2018.txt
+
+sent 34,814,626,378 bytes  received 171 bytes  198,373,940.45 bytes/sec
+total size is 34,806,128,019  speedup is 1.00

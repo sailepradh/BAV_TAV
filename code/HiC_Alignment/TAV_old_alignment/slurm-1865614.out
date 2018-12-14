@@ -1,0 +1,13 @@
+sample_name TAV2515
+base_file_name TAV2515
+Detecting R automatically
+Found R at '/usr/bin/R'
+Truncating with HiCUP Truncater v0.5.7
+Truncating sequences at occurrence of sequence 'GATCGATC'
+Truncating sequences
+Truncating /scratch/1865614/TAV2515_R1_001.fastq.gz
+Truncating /scratch/1865614/TAV2515_R2_001.fastq.gz
+Truncating complete
+Submitted batch job 1870001
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded job memory limit at some point.

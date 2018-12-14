@@ -1,0 +1,22 @@
+sample_name TAV2431
+base_file_name TAV2431
+Lmod has detected the following error: The following module(s) are unknown:
+"bowtie2/2.2.6"
+
+Please check the spelling or version number. Also try "module spider ..."
+
+
+
+
+Created a directory within current directory  TAV2431
+Detecting R automatically
+Found R at '/usr/bin/R'
+Truncating with HiCUP Truncater v0.5.7
+Truncating sequences at occurrence of sequence 'GATCGATC'
+Truncating sequences
+Truncating /scratch/1872918/TAV2431_R1_001.fastq.gz
+Truncating /scratch/1872918/TAV2431_R2_001.fastq.gz
+Truncating complete
+Submitted batch job 1875819
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded job memory limit at some point.

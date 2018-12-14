@@ -1,0 +1,24 @@
+sample_name BAV2714EC
+base_file_name BAV2714EC
+Map with Bowtie 2 *.trunc.fastq.gz
+535357962 reads; of these:
+  535357962 (100.00%) were unpaired; of these:
+    14288471 (2.67%) aligned 0 times
+    393064046 (73.42%) aligned exactly 1 time
+    128005445 (23.91%) aligned >1 times
+97.33% overall alignment rate
+
+real	602m18.694s
+user	5416m37.124s
+sys	575m19.058s
+535357962 reads; of these:
+  535357962 (100.00%) were unpaired; of these:
+    74999329 (14.01%) aligned 0 times
+    355937996 (66.49%) aligned exactly 1 time
+    104420637 (19.50%) aligned >1 times
+85.99% overall alignment rate
+
+real	652m24.212s
+user	5869m22.182s
+sys	646m59.960s
+Submitted batch job 6528581

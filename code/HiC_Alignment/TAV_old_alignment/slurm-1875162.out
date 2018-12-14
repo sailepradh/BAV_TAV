@@ -1,0 +1,61 @@
+
+Inactive Modules:
+  1) bowtie2/2.2.9  2) samtools/1.3
+
+sample_name TAV2515
+base_file_name TAV2515
+
+Activating Modules:
+  1) bowtie2/2.2.9  2) samtools/1.3
+
+Current directory is  /crex2/proj/sllstore2017025/nobackup/private/TAV/bamfiles/updated
+File Name	Total_reads_processed	Reads_too_short_to_map	%Reads_too_short_to_map	Unique_alignments	%Unique_alignments	Multiple_alignments	%Multiple_alignments	Failed_to_align	%failed_to_align	Paired	%Paired
+/home/anan/glob/TAV2515/TAV2515_1.trunc.bam	1.13007e+09	15008	0.00132806	7.60281e+08	67.2771	3.28693e+08	29.086	4.10843e+07	3.63554	5.27884e+08	46.7124
+/home/anan/glob/TAV2515/TAV2515_2.trunc.bam	1.13007e+09	26582	0.00235224	7.46311e+08	66.0409	3.21174e+08	28.4206	6.25625e+07	5.53614	5.27884e+08	46.7124
+Detecting R automatically
+Number of threads set to 1
+Found R at '/usr/bin/R'
+Filtering with HiCUP Filter v0.5.7
+Processing digest file /crex1/proj/snic2016-7-108/nobackup/External/hicup_v0.5.7/digested_genome_files/Digest_hg19_MboI_None_11-39-03_22-01-2016.txt
+Sonication protocol followed - Restriction_Enzyme1:MboI [^GATC]
+Filtering /scratch/1875162/TAV2515.trunc.pair.bam
+Filtering complete
+Detecting R automatically
+Found R at '/usr/bin/R'
+Removing duplicates with HiCUP Deduplicator v0.5.7
+De-duplicating /scratch/1875162/TAV2515.trunc.filt.sam
+De-duplication complete
+[bam_sort_core] merging from 238 files...
+rm: cannot remove ‘/scratch/1875162/*.filt.bam’: No such file or directory
+rm: cannot remove ‘/scratch/1875162/*.trunc.bam’: No such file or directory
+rm: cannot remove ‘/scratch/1875162/*.fastq.gz’: No such file or directory
+rm: cannot remove ‘/scratch/1875162/*.fastq’: No such file or directory
+rm: cannot remove ‘/scratch/1875162/hg19.*’: No such file or directory
+rm: cannot remove ‘/home/anan/glob/TAV2515/*fastq.gz’: No such file or directory
+
+
+Copying back the resulting analysis files at fre jan 26 00:54:38 CET 2018
+sending incremental file list
+./
+TAV2515.trunc.dedup.sorted.bam
+TAV2515.trunc.dedup.sorted.bam.bai
+TAV2515.trunc.ditag_size_distribution.svg
+TAV2515.trunc.filt.sam.deduplicator_cis_trans_piechart.svg
+TAV2515.trunc.filt.sam.deduplicator_uniques_barchart.svg
+TAV2515.trunc.pair.bam.filter_piechart.svg
+hicup_deduplicator_summary_13-12-46_25-01-2018.txt
+hicup_filter_summary_00-19-31_25-01-2018.txt
+
+sent 28967781643 bytes  received 167 bytes  90383094.57 bytes/sec
+total size is 28964245244  speedup is 1.00
+sending incremental file list
+./
+TAV2515_R1_001.fastq.gz.truncation_barchart.svg
+TAV2515_R2_001.fastq.gz.truncation_barchart.svg
+hicup_truncater_summary_12-04-06_23-01-2018.txt
+hicup_truncater_summary_15-27-25_15-01-2018.txt
+
+sent 107430 bytes  received 91 bytes  215042.00 bytes/sec
+total size is 107026  speedup is 1.00
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded job memory limit at some point.

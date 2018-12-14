@@ -1,0 +1,24 @@
+sample_name BAV2424
+base_file_name BAV2424
+Map with Bowtie 2 *.trunc.fastq.gz
+1492915756 reads; of these:
+  1492915756 (100.00%) were unpaired; of these:
+    33703193 (2.26%) aligned 0 times
+    1056906880 (70.79%) aligned exactly 1 time
+    402305683 (26.95%) aligned >1 times
+97.74% overall alignment rate
+
+real	1694m39.560s
+user	15388m44.227s
+sys	1481m55.774s
+1492915756 reads; of these:
+  1492915756 (100.00%) were unpaired; of these:
+    54052144 (3.62%) aligned 0 times
+    1078555819 (72.24%) aligned exactly 1 time
+    360307793 (24.13%) aligned >1 times
+96.38% overall alignment rate
+
+real	1710m6.883s
+user	15473m34.568s
+sys	1548m32.379s
+Submitted batch job 6191719

@@ -1,0 +1,24 @@
+sample_name TAV2709EC
+base_file_name TAV2709EC
+Map with Bowtie 2 *.trunc.fastq.gz
+591786954 reads; of these:
+  591786954 (100.00%) were unpaired; of these:
+    15011207 (2.54%) aligned 0 times
+    433697218 (73.29%) aligned exactly 1 time
+    143078529 (24.18%) aligned >1 times
+97.46% overall alignment rate
+
+real	669m33.877s
+user	6031m32.418s
+sys	629m49.181s
+591786954 reads; of these:
+  591786954 (100.00%) were unpaired; of these:
+    77782736 (13.14%) aligned 0 times
+    397125752 (67.11%) aligned exactly 1 time
+    116878466 (19.75%) aligned >1 times
+86.86% overall alignment rate
+
+real	734m24.537s
+user	6655m46.243s
+sys	682m53.374s
+Submitted batch job 6528935

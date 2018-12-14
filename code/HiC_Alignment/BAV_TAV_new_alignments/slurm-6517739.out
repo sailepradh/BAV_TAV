@@ -1,0 +1,12 @@
+sample_name TAV2709EC
+base_file_name TAV2709EC
+Created a directory within current directory  TAV2709EC
+Detecting R automatically
+Found R at '/usr/bin/R'
+Truncating with HiCUP Truncater v0.5.7
+Truncating sequences at occurrence of sequence 'GATCGATC'
+Truncating sequences
+Truncating /scratch/6517739/TAV2709EC_R2_001.fastq.gz
+Truncating /scratch/6517739/TAV2709EC_R1_001.fastq.gz
+Truncating complete
+Submitted batch job 6526108
