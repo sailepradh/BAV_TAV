@@ -22,8 +22,10 @@ ProbeDesigner and ProximityDetector then takes the bam files and gives the probe
     * Gitclone the [HiCaptools](https://github.com/sahlenlab/HiCapTools)
     * module load cmake/3.7.2  gcc/4.9.2
     * Compile HiCaptools using the shell script  *./buildHiCapTools.sh*
-    *  export *LD_LIBRARY_PATH=/path/to/HiCapTools/bamtools/:$LD_LIBRARY_PATH*
+    *  *export LD_LIBRARY_PATH=/path/to/HiCapTools/bamtools/:$LD_LIBRARY_PATH*
     * The executable hicaptools are in bin folder
+    * ./bin/HiCapTools -h
 
+Something is not right in here. I guess the earlier HiCap was run with different probe than the new ones. Currently I am testing with the earlier probe set but must be checked meticulously. 
 
 More scripts and codes will be updated as we go forward with the project
