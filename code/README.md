@@ -26,6 +26,6 @@ ProbeDesigner and ProximityDetector then takes the bam files and gives the probe
     * The executable hicaptools are in bin folder
     * ./bin/HiCapTools -h
 
-Something is not right in here. I guess the earlier HiCap was run with different probe than the new ones. Currently I am testing with the earlier probe set but must be checked meticulously. 
+Something is not right in here. I guess the earlier HiCap was run with different probe than the new ones. Currently I am testing with the earlier probe set but must be checked meticulously.
 
 More scripts and codes will be updated as we go forward with the project
