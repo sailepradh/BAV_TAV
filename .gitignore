@@ -1,0 +1,8 @@
+# gitginore following files
+
+# IPython
+profile_default/
+ipython_config.py
+data/*.txt
+logs/*.txt
+scratch/*.txt
