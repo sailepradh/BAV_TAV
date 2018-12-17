@@ -5,8 +5,11 @@ profile_default/
 ipython_config.py
 
 # Data files
-data/raw_external/*.txt
-data/raw_interna/*.txt
+data/*.txt
+data/meta/*.csv
+data/meta/*
+data/raw_internal/*.txt
+data/raw_internal/*
 data/*.txt
 meta/*.txt
 data/*.csv
