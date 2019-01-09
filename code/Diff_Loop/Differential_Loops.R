@@ -1,5 +1,6 @@
-source("https://bioconductor.org/biocLite.R")
-biocLite("edgeR")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("edgeR", version = "3.8")
 library("edgeR")
 
 
@@ -7,12 +8,12 @@ library("edgeR")
                         #sep ="\t", header= FALSE, row.names=1)
 
 
-
-counttable= read.table( "/Volumes/Work_drive/prj/THP1_July_2018/data/raw_external/Sep_2018/DE_loop_test2/count_test.txt",
+counttable= read.table( "/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Dec_17_HiCap_test_runs/Filtered_dataset/DL_data/SP_Counts_filt.txt",
                         sep ="\t", header= FALSE, row.names=1)
 
-colnames(counttable) <- c("nlps_rep1", "nlps_rep3","wlps_rep1", "wlps_rep3")
-mobDataGroups <- c("LPS_Untreated", "LPS_Untreated", "LPS_Treated", "LPS_Treated")
+colnames(counttable) <- c("TAV_rep1", "TAV_rep2","TAV_rep3","BAV_rep1", "BAV_rep2", "BAV_rep3")
+mobDataGroups <- c("TAV", "TAV", "TAV",
+                   "BAV", "BAV", "BAV")
 d <- DGEList(counts=counttable,group=factor(mobDataGroups))
 
 dim(d)
@@ -30,12 +31,15 @@ head(d$counts)
 
 
 ## no of read pairs in corresponding
-THP1nLPS1 = 2280581 + 79174043
-THP1nLPS3 = 2155432 + 97124480
-THP1wLPS1 = 3888185 + 126873916
-THP1wLPS3 = 3613702 + 157841817
+TAV2431 = 2129053 + 104216145
+TAV2515 = 1975040 + 94842378
+TAV2709 = 9256828 + 83131288
+BAV2375 = 2762832 + 132399792
+BAV2424 = 2153215 + 115494826
+BAV2714 = 8315224 + 76183712
 
-d$samples$lib.size <- c(81454624,99279912 , 130762101, 161455519)
+
+d$samples$lib.size <- c(TAV2431,TAV2515,TAVrep3,BAV2375, BAV2424,BAV2714 )
 d$samples
 
 
@@ -62,7 +66,7 @@ plotBCV(d2)
 
 et12 <- exactTest(d1, pair=c(1,2))
 topTags(et12, n=10)
-de1 <- decideTestsDGE(et12, adjust.method="BH", p.value=0.05)
+de1 <- decideTestsDGE(et12, adjust.method="BH", p.value=0.1)
 summary(de1)
 
 de1tags12 <- rownames(d1)[as.logical(de1)]
@@ -75,7 +79,7 @@ design.mat
 fit <- glmFit(d2, design.mat)
 lrt12 <- glmLRT(fit, contrast=c(-1,1))
 topTags(lrt12, n=10)
-de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.05)
+de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.1)
 #de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.1)
 de2tags12 <- rownames(d2)[as.logical(de2)]
 plotSmear(lrt12, de.tags=de2tags12)
@@ -84,14 +88,14 @@ summary(de2)
 
 DE_Loops <- lrt12$table
 DE_Loops$p_adjust <- p.adjust(DE_Loops$PValue, method = "BH")
-DE_Loop_significant <- subset(DE_Loops, DE_Loops$p_adjust < 0.05 )
+DE_Loop_significant <- subset(DE_Loops, DE_Loops$p_adjust < 0.1)
 
 write.table(DE_Loop_significant,
-            "/Volumes/Work_drive/prj/THP1_July_2018/data/raw_external/Sep_2018/DE_loop_test2/DE_Loop_significant.tsv",
+            "/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Dec_17_HiCap_test_runs/Filtered_dataset/DL_data/DL_significant.tsv",
             sep="\t", quote = F, row.names = TRUE)
 
 write.table(DE_Loops,
-            "/Volumes/Work_drive/prj/THP1_July_2018/data/raw_external/Sep_2018/DE_loop_test2/DE_Loop_all.tsv",
+            "/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Dec_17_HiCap_test_runs/Filtered_dataset/DL_data/DL_Loop_all.tsv",
             sep="\t", quote = F, row.names = TRUE)
 
 
