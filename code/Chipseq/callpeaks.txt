@@ -1,0 +1,30 @@
+#!/bin/bash -l
+#SBATCH -A b2010029
+#SBATCH -p node
+#SBATCH -t 1-00:00:00
+#SBATCH -J MACS2
+#SBATCH -o callpeaks.out
+#SBATCH -e callpeaks.err
+#SBATCH --mail-user pelin.akan@scilifelab.se
+#SBATCH --mail-type=ALL
+#SBATCH --tmp=20480 
+
+# bioinfo-tools contains many useful programs
+module load bioinfo-tools
+module load MACS/1.4.1
+module load samtools
+module load picard
+
+#go to working directory
+cd /bubo/home/h20/pelin/app_b2013036/pelin/BAM
+
+macs14 callpeak -t IgG1.bam -c Input.bam -f BAM -g hs -n IgG1peaks 
+macs14 callpeak -t IgG2.bam -c Input.bam -f BAM -g hs -n IgG2peaks 
+macs14 callpeak -t IgG3.bam -c Input.bam -f BAM -g hs -n IgG3peaks 
+macs14 callpeak -t VHL1.bam -c Input.bam -f BAM -g hs -n VHL1peaks 
+macs14 callpeak -t VHL2.bam -c Input.bam -f BAM -g hs -n VHL2peaks 
+macs14 callpeak -t VHL3.bam -c Input.bam -f BAM -g hs -n VHL3peaks 
+macs14 callpeak -t Myc.bam -c Input.bam -f BAM -g hs -n Mycpeaks 
+
+
+
