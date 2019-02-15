@@ -1,0 +1,82 @@
+## Combing Biological replicates of BAV and TAV from H3K27ac Chipseq narrowPeak bed files
+
+
+module load bioinfo-tools BEDTools
+
+
+##BAV
+
+awk -v OFS="\t" '{print "chr"$1,$2,$3}' BAV2737acetyl_S10.sort.dup.bam_peaks.narrowPeak |sort -k 1,1 -k2,2n > BAV2737_H3K27ac.bed
+
+awk -v OFS="\t" '{print "chr"$1,$2,$3}' BAV2742acetyl_S6.sort.dup.bam_peaks.narrowPeak |sort -k 1,1 -k2,2n > BAV2742_H3K27ac.bed
+
+bedtools intersect -a BAV2737_H3K27ac.bed -b BAV2742_H3K27ac.bed  -wa -wb  > BAV_Replicates
+
+############
+awk '{ if (($2 == $5) && ($3 == $6)) print $1,$2,$3}' BAV_Replicates > 0.txt
+awk '{ if (($2 != $5) && ($3 == $6) && ($2 < $5) ) print $1,$2,$3}' BAV_Replicates > 1.txt
+awk '{ if (($2 != $5) && ($3 == $6) && ($2 > $5) ) print $1,$5,$3}' BAV_Replicates > 2.txt
+
+awk '{ if (($2 == $5) && ($3 != $6) && ($3 < $6) ) print $1,$2,$6}' BAV_Replicates > 3.txt
+awk '{ if (($2 == $5) && ($3 != $6) && ($3 > $6) ) print $1,$2,$3}' BAV_Replicates > 4.txt
+
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 > $5) &&  ($3 > $6) ) print $1,$2,$3}' BAV_Replicates  > 5.txt
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 < $5) &&  ($3 > $6) ) print $1,$2,$3}' BAV_Replicates  > 6.txt
+
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 < $5) &&  ($3 < $6) ) print $1,$2,$6}' BAV_Replicates  > 7.txt
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 > $5) &&  ($3 < $6) ) print $1,$5,$6}' BAV_Replicates  > 8.txt
+
+cat 1.txt 2.txt 3.txt 4.txt 5.txt 6.txt 7.txt 8.txt  |sort -k 1,1 -k2,2n |uniq |awk -v OFS="\t" '{print $1,$2,$3}' > tmp ; mv tmp BAV_Replicates.bed
+
+rm -r *.txt
+
+
+
+##TAV
+
+awk -v OFS="\t" '{print "chr"$1,$2,$3}' TAV2519acetyl_S3_R1_001.fastq.gz.sort.dup.bam_peaks.narrowPeak |sort -k 1,1 -k2,2n > TAV2519_H3K27ac.bed
+
+awk -v OFS="\t" '{print "chr"$1,$2,$3}' TAV2675acetyl_S8_R1_001.fastq.gz.sort.dup.bam_peaks.narrowPeak |sort -k 1,1 -k2,2n > TAV2675_H3K27ac.bed
+
+bedtools intersect -a TAV2519_H3K27ac.bed -b TAV2675_H3K27ac.bed  -wa -wb  > TAV_Replicates
+
+##############
+awk '{ if (($2 == $5) && ($3 == $6)) print $1,$2,$3}' BAV_Replicates > 0.txt
+awk '{ if (($2 != $5) && ($3 == $6) && ($2 < $5) ) print $1,$2,$3}' TAV_Replicates > 1.txt
+awk '{ if (($2 != $5) && ($3 == $6) && ($2 > $5) ) print $1,$5,$3}' TAV_Replicates > 2.txt
+
+awk '{ if (($2 == $5) && ($3 != $6) && ($3 < $6) ) print $1,$2,$6}' TAV_Replicates > 3.txt
+awk '{ if (($2 == $5) && ($3 != $6) && ($3 > $6) ) print $1,$2,$3}' TAV_Replicates > 4.txt
+
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 > $5) &&  ($3 > $6) ) print $1,$2,$3}' TAV_Replicates  > 5.txt
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 < $5) &&  ($3 > $6) ) print $1,$2,$3}' TAV_Replicates  > 6.txt
+
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 < $5) &&  ($3 < $6) ) print $1,$2,$6}' TAV_Replicates  > 7.txt
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 > $5) &&  ($3 < $6) ) print $1,$5,$6}' TAV_Replicates  > 8.txt
+
+cat 1.txt 2.txt 3.txt 4.txt 5.txt 6.txt 7.txt 8.txt  |sort -k 1,1 -k2,2n |uniq |awk -v OFS="\t" '{print $1,$2,$3}' > tmp ; mv tmp TAV_Replicates.bed
+
+rm -r *.txt
+
+
+## Complete overlap for both of these
+## testing with complete overlap
+
+
+bedtools intersect -a BAV_Replicates.bed  -b TAV_Replicates.bed  -wa -wb > BAV_TAV_Replicates
+
+awk '{ if (($2 == $5) && ($3 == $6)) print $1,$2,$3}' BAV_TAV_Replicates > 0.txt
+awk '{ if (($2 != $5) && ($3 == $6) && ($2 < $5) ) print $1,$2,$3}' BAV_TAV_Replicates > 1.txt
+awk '{ if (($2 != $5) && ($3 == $6) && ($2 > $5) ) print $1,$5,$3}' BAV_TAV_Replicates > 2.txt
+
+awk '{ if (($2 == $5) && ($3 != $6) && ($3 < $6) ) print $1,$2,$6}' BAV_TAV_Replicates > 3.txt
+awk '{ if (($2 == $5) && ($3 != $6) && ($3 > $6) ) print $1,$2,$3}' BAV_TAV_Replicates > 4.txt
+
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 > $5) &&  ($3 > $6) ) print $1,$2,$3}' BAV_TAV_Replicates > 5.txt
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 < $5) &&  ($3 > $6) ) print $1,$2,$3}' BAV_TAV_Replicates  > 6.txt
+
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 < $5) &&  ($3 < $6) ) print $1,$2,$6}' BAV_TAV_Replicates  > 7.txt
+awk '{ if (($2 != $5) && ($3 != $6) && ($2 > $5) &&  ($3 < $6) ) print $1,$5,$6}' BAV_TAV_Replicates  > 8.txt
+
+
+cat 0.txt 1.txt 2.txt 3.txt 4.txt 5.txt 6.txt 7.txt 8.txt  |sort -k 1,1 -k2,2n |uniq |awk -v OFS="\t" '{print $1,$2,$3}' > tmp ; mv tmp BAVTAV_Replicates.bed
