@@ -17,7 +17,7 @@ rsync -rptoDLv /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2424/
 
 wait
 
-samplename=$SNIC_TMP/sail/BAV2714EC
+samplename=$SNIC_TMP/sail/BAV2424
 
 rsync -rptoDLv /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf $SNIC_TMP/sail
 
@@ -90,6 +90,9 @@ java -Xmx4g -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar \
 -T HaplotypeCaller \
 -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  \
 -I $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam \
+-ERC GVCF \
+-G Standard \
+-G AS_Standard \
 -nct 16 \
 --dbsnp /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf \
 -o $samplename.snp.g.vcf

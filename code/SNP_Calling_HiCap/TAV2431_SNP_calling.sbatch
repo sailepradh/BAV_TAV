@@ -81,7 +81,7 @@ java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar \
 -nct 16
 
 echo "copy back recalibrated bam file"
-#rsync -rptoDLv $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam  /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/
+rsync -rptoDLv $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam  /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/TAV2431.trunc.dedup.sortedbycoord.withreadgroups.recal.bam
 wait
 
 echo "call snps"
@@ -90,6 +90,9 @@ java -Xmx4g -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar \
 -T HaplotypeCaller \
 -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  \
 -I $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam \
+-ERC GVCF \
+-G Standard \
+-G AS_Standard \
 -nct 16 \
 --dbsnp /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf \
 -o $samplename.snp.g.vcf

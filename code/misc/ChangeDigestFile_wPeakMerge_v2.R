@@ -1,28 +1,17 @@
 #Original code by Tobias Everhorn, 2018
-## install library before using all of these 
 
-#install.packages("tidyverse")
-#install.packages("readr")
-
-#if (!requireNamespace("BiocManager", quietly = TRUE))
-#  install.packages("BiocManager")
-#BiocManager::install("GenomicRanges", version = "3.8")
-#install.packages("tictoc") 
-
-
-setwd("/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/HICCUP_files/")
+setwd("/Users/pelin.akan/HiCap/ClaesW/ChIP-ATLAS/")
 rm(list=ls())
 
 library(readr)
 library(dplyr)
 library(GenomicRanges)
-library(tictoc)
 
 ### Load input file
 # Created using the following bedtools line:
-# bedtools intersect -wao -a Digest_mm10_MboI_Full.sorted.bed -b All_PeaksMerged_v1_FINAL.txt > Fragments_andOverlapInfo.txt
+# bedtools intersect -wao -a Digest_mm10_MboI_Full.sorted.bed -b All_PeaksMerged_v1_FINAL.txt > Fragments_w_overlap_v8.txt
 
-Frag_overlap_info <- read.delim("Fragments_andOverlapInfo.txt", header = FALSE, stringsAsFactors = FALSE)
+Frag_overlap_info <- read.delim("Digest_Intersect_Peak.bed", header = FALSE, stringsAsFactors = FALSE)
 
 #chrM    1       741     1       1       None    Re1     .       -1      -1      0
 #chrM    742     952     2       2       Re1     Re1     .       -1      -1      0
@@ -125,4 +114,4 @@ names(new_Digest)[7] = "3'_Restriction_Site"
 
 new_Digest = new_Digest[-(j:i),]
 
-write.table(new_Digest, file="DigestFile_wPeaks_chip-atlas-enhancer-marks_BAVTAV.v2.txt", quote=F, sep="\t", row.names=F, col.names=F)
+write.table(new_Digest, file="DigestFile_wPeaks_chip-atlas-enhancer-marks_Liver.v2.txt", quote=F, sep="\t", row.names=F, col.names=F)

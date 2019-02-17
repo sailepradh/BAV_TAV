@@ -1,11 +1,11 @@
 #!/bin/bash -l
 
-#SBATCH -A g2018023
-#SBATCH -o gatkHCchr1nlps.out
-#SBATCH -e gatkHCchr1nlps.err
+#SBATCH -A snic2016-7-108
+#SBATCH -o BAV2714EC.out
+#SBATCH -e BAV2714EC.err
 #SBATCH -p node -n 16
 #SBATCH -t 20:00:00
-#SBATCH -J call_snps_BAV2375
+#SBATCH -J call_snps_BAV2714EC
 #SBATCH --mail-user sailendra.pradhananga@scilifelab.se
 #SBATCH --mail-type=ALL
 
@@ -13,7 +13,7 @@ mkdir -p $SNIC_TMP/sail
 
 echo "copy bam files"
 
-rsync -rptoDLv /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2375/BAV2714EC/BAV2375.trunc.dedup.sorted.bam $SNIC_TMP/sail
+rsync -rptoDLv /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/BAV2714EC/BAV2714EC.trunc.dedup.sorted.bam $SNIC_TMP/sail
 
 wait
 
@@ -90,6 +90,9 @@ java -Xmx4g -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar \
 -T HaplotypeCaller \
 -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  \
 -I $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam \
+-ERC GVCF \
+-G Standard \
+-G AS_Standard \
 -nct 16 \
 --dbsnp /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf \
 -o $samplename.snp.g.vcf
@@ -98,7 +101,7 @@ wait
 
 #copy back snp file
 echo "copy back snp files"
-rsync -rptoDLv $samplename.snp.g.vcf /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/BAV237.vcf
+rsync -rptoDLv $samplename.snp.g.vcf /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/BAV2714.vcf
 
 
 echo "VCF file made"

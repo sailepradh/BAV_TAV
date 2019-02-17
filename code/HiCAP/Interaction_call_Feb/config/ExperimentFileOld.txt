@@ -1,0 +1,64 @@
+............................................................................................................................
+........................................Enter your Experiment details.......................................................
+............................................................................................................................
+
+/--The file path to Feature Probe file in gff3 fromat. Required field--/
+Feature Probe File=/crex/proj/sllstore2017025/private/supplementaryFiles/oldfileslatformat/Probes_Design4_5.uniq.exonspurged.gff3
+
+/--The file path to Negative Control Probe file in gff3 fromat. Required if Calculate p_values is Yes. Leave empty otherwise--/
+Negative control Probe File=/crex/proj/sllstore2017025/private/supplementaryFiles/oldfileslatformat/Probes_Design4_5.uniq.exonspurged.NegCtrl.gff3
+
+/--The file path to Digested Genome File Name in txt format. If left empty, HiCapTools will generate the Digest file--/
+Digested Genome File=/crex/proj/sllstore2017025/private/supplementaryFiles/Digest_hg19_MboI_None_11-39-03_22-01-2016.txt
+
+/--The cut site motif of the restiction enzyme used to digest the genome in the following format with the cut site indicated by a '^'. X^XXX,EnzymeName. Eg. ^GATC,MboI ; A^AGCTT,HindIII. --/
+/--Required field if Digested Genome File field is left empty--/
+RE cut site motif=^GATC,MboI
+
+/--The genome assembly build version in the format 'buildVersion,source'. Eg. hg19,UCSC --/
+/--Required field if Digested Genome File field is left empty--/
+Genome assembly=hg19,UCSC
+
+/--The path to the fasta file containing the genomic sequence--/
+/--Required field if Digested Genome File field is left empty--/
+Fasta File=
+
+/--The file path to Transcript List File in given fromat. Either Transcript List file or SNV List file is required. Both can be used together--/
+Transcript List File=/crex/proj/sllstore2017025/private/supplementaryFiles/oldfileslatformat/newFull.trans.bed6.noneg.txt
+
+/--The file path to the SNV List File in BED format. Either Transcript List file or SNV List file is required. Both can be used together--/
+SNV List File=/crex/proj/sllstore2017025/private/supplementaryFiles/oldfileslatformat/newFull.snv.bed6.new.txt
+
+/--The file path to the Negative Control Region File in BED format from HiCapTools ProbeDesigner. Required if Calculate p_values is Yes--/
+Negative control region File=/crex/proj/sllstore2017025/private/supplementaryFiles/oldfileslatformat/newFull.neg.bed
+
+/--The target tags in the Attribute field with which Probes are annotated in the Probe files. If more than one target term is associated, put on same line separated by commas --/
+Promoters=promoter
+SNVs=SNV
+Negative controls=neg_ctrl
+Other=other
+
+/--The experiment details. Enter the experiment details below. Enter integer for number of experiments--/
+Number of Experiments=4
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 5 fields as many times as there are number of experiments. --/
+/--Background Files are mandatory if Use Prior Background is set to Yes. Leave blank otherwise --/
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/TAV/bamfiles/updated/TAV2431/TAV2431.trunc.dedup.sorted.bam
+Experiment Name=TAV2431
+Probe Design Name=Design4_Design5
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/TAV/bamfiles/updated/TAV2515/TAV2515.trunc.dedup.sorted.bam
+Experiment Name=TAV2515
+Probe Design Name=Design4_Design5
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2375/BAV2375.trunc.dedup.sorted.bam
+Experiment Name=BAV2375
+Probe Design Name=Design4_Design5
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2424/BAV2424.trunc.dedup.sorted.bam
+Experiment Name=BAV2424
+Probe Design Name=Design4_Design5
+
+
