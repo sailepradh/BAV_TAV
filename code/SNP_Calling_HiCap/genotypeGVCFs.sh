@@ -12,7 +12,7 @@
 echo "$(date) Running on: $(hostname)"
 echo "$(date) Running on: $(hostname)" >&2
 
-"ava -Xmx4g -jar  /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T CombineVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta --variant TAV2709.vcf  --variant TAV2431.vcf --variant TAV2515.vcf  --variant  BAV2714.vcf --variant BAV2424.vcf  --variant BAV2375.vcf -o combined.vcf -genotypeMergeOptions UNIQUIFY"
+
 
 module load bioinfo-tools
 module load samtools/1.3
@@ -45,7 +45,7 @@ java -Xmx50g -jar $GATK -nt 8 -T GenotypeGVCFs \
 -A MappingQualityZero \
 -A MappingQualityZeroBySample \
 -A QualByDepth \
--o $input/raw_variants.vcf.gz
+--o $input/raw_variants.vcf.gz
 
 wait
 

@@ -29,7 +29,7 @@ $reference --filterExpression  "QUAL < 50.0" --filterName "LowQual" \
 --filterExpression "FS > 60" --filterName "FisherSB" --filterExpression "QD<1.0" --filterName "QualByDepth" \
 --filterExpression "(MQ0 >= 4 && ((MQ0/(1.0 * DP)) > 0.1))" --filterName "FUBAR" \
 --variant raw_variants.vcf \
-q--out filtered_variants.vcf
+--out filtered_variants.vcf
 
 echo "Variant filtration done. $(date) Running on: $(hostname)"
 echo "---> VQSR <---"
