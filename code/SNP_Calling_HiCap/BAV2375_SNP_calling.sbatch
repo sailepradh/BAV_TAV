@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH -A g2018023
+#SBATCH -A snic2017-7-367
 #SBATCH -o BAV2375_HC_SNP.out
 #SBATCH -e BAV2375_HC_SNP.err
 #SBATCH -p node -n 16
@@ -65,7 +65,7 @@ java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar \
 -nct 16
 
 echo "copy back quality score table"
-rsync -rptoDLv $samplename.recal_data.table /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/
+rsync -rptoDLv $samplename.recal_data.table /crex/proj/g2018023/nobackup/private/
 
 wait
 
@@ -81,7 +81,7 @@ java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar \
 -nct 16
 
 echo "copy back recalibrated bam file"
-#rsync -rptoDLv $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam  /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/
+#rsync -rptoDLv $samplename.trunc.dedup.sortedbycoord.withreadgroups.recal.bam  /crex/proj/g2018023/nobackup/private/
 wait
 
 echo "call snps"
@@ -101,7 +101,7 @@ wait
 
 #copy back snp file
 echo "copy back snp files"
-rsync -rptoDLv $samplename.snp.g.vcf /crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/SNP_calling/BAV237.vcf
+rsync -rptoDLv $samplename.snp.g.vcf /crex/proj/g2018023/nobackup/private/BAV2375.vcf
 
 
 echo "VCF file made"
