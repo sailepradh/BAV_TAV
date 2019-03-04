@@ -1,0 +1,76 @@
+............................................................................................................................
+........................................Enter your Experiment details.......................................................
+............................................................................................................................
+
+/--The file path to Feature Probe file in gff3 fromat. Required field--/
+Feature Probe File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Design6.hg19.AllProbes.MboI.13.23.06_2017-08-17.gff3
+
+/--The file path to Negative Control Probe file in gff3 fromat. Required if Calculate p_values is Yes. Leave empty otherwise--/
+Negative control Probe File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Design6.hg19.NegCtrlProbes.MboI.15.37.32_2017-08-25.1250.gff3
+
+/--The file path to Digested Genome File Name in txt format. If left empty, HiCapTools will generate the Digest file--/
+Digested Genome File=/crex/proj/sllstore2017025/private/supplementaryFiles/Digest_hg19_MboI_None_11-39-03_22-01-2016.txt
+
+/--The cut site motif of the restiction enzyme used to digest the genome in the following format with the cut site indicated by a '^'. X^XXX,EnzymeName. Eg. ^GATC,MboI ; A^AG
+CTT,HindIII. --/
+/--Required field if Digested Genome File field is left empty--/
+RE cut site motif=^GATC,MboI
+
+/--The genome assembly build version in the format 'buildVersion,source'. Eg. hg19,UCSC --/
+/--Required field if Digested Genome File field is left empty--/
+Genome assembly=hg19,UCSC
+
+/--The path to the fasta file containing the genomic sequence--/
+/--Required field if Digested Genome File field is left empty--/
+Fasta File=
+
+/--The file path to Transcript List File in given fromat. Either Transcript List file or SNV List file is required. Both can be used together--/
+Transcript List File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Sorted_Ref_PC_NC_ENSEMBL_transcript.bed6.sorted.dedup.txt
+
+/--The file path to the SNV List File in BED format. Either Transcript List file or SNV List file is required. Both can be used together--/
+SNV List File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Design6_GWASSNPs6.txt
+
+/--The file path to the Negative Control Region File in BED format from HiCapTools ProbeDesigner. Required if Calculate p_values is Yes--/
+Negative control region File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Design6.hg19.AllNegativeControlProbeSequences.MboI.15.37.32_2017-08-25.1250.bed
+
+/--The target tags in the Attribute field with which Probes are annotated in the Probe files. If more than one target term is associated, put on same line separated by commas
+ --/
+Promoters=promoter
+SNVs=SNP
+Negative controls=neg_ctrl
+Other=other
+
+/--The experiment details. Enter the experiment details below. Enter integer for number of experiments--/
+Number of Experiments=2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+
+Experiment Name=BAV2714EC
+Probe Design Name=Design6
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/BAV2714SMC/BAV2714SMCdbenr_S3.trunc.dedup.sorted.bam
+Experiment Name=BAV2714SMC
+Probe Design Name=Design6
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/BAV2742SMC/BAV2742SMCdbenr_S1.trunc.dedup.sorted.bam
+Experiment Name=BAV2742SMC
+Probe Design Name=Design6
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/BAV2764SMC/BAV2764SMCdbenr_S5.trunc.dedup.sorted.bam
+Experiment Name=BAV2764SMC
+Probe Design Name=Design6
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/TAV2709EC/TAV2709ECdbenr_S6.trunc.dedup.sorted.bam
+Experiment Name=TAV2709EC
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/TAV2736SMC/TAV2736SMCdbenr_S4.trunc.dedup.so.bam
+Experiment Name=TAV2736SMC
+Probe Design Name=Design6
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/TAV2709EC/TAV2709EC.trunc.dedup.sorted.bam
+Experiment Name=TAV2709
+Probe Design Name=Design6
+
+Experiment BAM File Name Path=/crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/BAV2714EC/BAV2714EC.trunc.dedup.sorted.bam
+Experiment Name=BAV2714
+Probe Design Name=Design6
