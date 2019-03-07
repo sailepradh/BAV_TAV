@@ -9,9 +9,11 @@ library("edgeR")
                         #sep ="\t", header= FALSE, row.names=1)
 
 
-setwd("/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_callsFeb/")
-counttable_raw = read.table( "BAVTAV.Proximities_SP4_p001_filtered.txt",
-                        sep ="\t", header= TRUE, row.names=1)
+setwd("/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_callsFeb/Differential_Interaction_PP/")
+counttable_raw = read.table( "BAVTAV.Proximities_SP4_p001_filtered_corrected.txt",
+                        sep ="\t",
+                        header= FALSE
+                        , row.names=1)
 
 counttable <- counttable_raw [,c(4:9)]
 head (counttable)
@@ -26,7 +28,7 @@ d.full <- d
 head(d$counts)
 
 #head(cpm(d))
-#apply(d$counts, 2, sum)
+#apply(d$counts, 5, sum)
 
 
 ##### Very very  lenient filter applied in here dont expect to get a lot of loops after this filer
@@ -60,7 +62,8 @@ d <- calcNormFactors(d)
 d
 
 par(mar=c(6, 6, 6, 6) + 0.8)
-plotMDS(d, method="bcv", col=as.numeric(d$samples$group),
+plotMDS(d, method ="bcv",
+        col=as.numeric(d$samples$group),
         cex.lab =  1.5,
         ylim = c(-1.0, 1.0),
         main = "\n MDS plot of Significant Interaction in BAV and TAV Replicates\n",
@@ -100,7 +103,7 @@ design.mat
 fit <- glmFit(d2, design.mat)
 lrt12 <- glmLRT(fit, contrast=c(-1,1))
 topTags(lrt12, n=10)
-de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.05, lfc = 2)
+de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.1, lfc = 2)
 #de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.1)
 de2tags12 <- rownames(d2) [as.logical(de2)]
 de2tags12_BAV <- rownames(d2) [as.logical(de2==-1)]
@@ -130,60 +133,25 @@ summary(de2)
 
 DE_Loops <- lrt12$table
 DE_Loops$p_adjust <- p.adjust(DE_Loops$PValue, method = "BH")
-DE_Loop_significant <- subset(DE_Loops, DE_Loops$p_adjust < 0.1)
+dim(DE_Loops)
+dim(counttable_raw)
+result_df <- merge.data.frame(counttable_raw , DE_Loops,
+                              by="row.names", 
+                              all.x=TRUE )
+
+DE_Loop_significant <- subset(result_df, result_df$p_adjust < 0.1)
+
+result_df <- merge.data.frame(counttable_raw , DE_Loops,
+              by="row.names", 
+              all.x=TRUE )
+
 
 write.table(DE_Loop_significant,
-            "DL_significant.tsv",
-            sep="\t", quote = F, row.names = TRUE)
+            "DL_significant_03_06.tsv",
+            sep="\t", quote = F, row.names = FALSE)
 
-write.table(DE_Loops,
-            "DL_Loop_all.tsv",
-            sep="\t", quote = F, row.names = TRUE)
-
-
-
-#write.table(DE_Loop_significant,
-#            "/Volumes/Work_drive/prj/THP1_July_2018/data/raw_external/Sep_2018/SP4_p0.05/corrected_CNVs/DE_Loop_significant_2.tsv",
-#            sep="\t", quote = F, row.names = TRUE)
+write.table(result_df,
+            "DL_Loop_03_06.tsv",
+            sep="\t", quote = F, row.names = FALSE)
 
 
-
-#write.table(DE_Loops,
-            #"/Volumes/Work_drive/prj/THP1_July_2018/data/raw_external/Sep_2018/SP4_p0.05/corrected_CNVs/DE_Loops.tsv",
-            #sep="\t", quote = F, row.names = TRUE)
-
-
-
-## Differential Looping results from Webgestatlt
-library(ggplot2)
-Enrichment_plot <- read.table( "Differential_Loops_result.txt",
-                               sep ="\t", header= TRUE)
- p = ggplot(Enrichment_plot, 
-            aes(x = reorder(Enrichment_plot$Description,Enrichment_plot$Ratio) 
-               ,y = Enrichment_plot$Ratio)) +
-        geom_bar(stat="identity",  fill="steelblue" ) +
-        coord_flip() +
-        xlab("Gene Ontology Biological Process") + 
-        ylab ("Enrichment ratio") 
-        
-
- p + theme(
-   
-   panel.grid.major = element_blank(),
-   panel.grid.minor = element_blank(),
-   panel.background = element_blank(),
-   panel.spacing = unit(3, "lines"),
-   
-   strip.text.x = element_blank(),
-   
-   axis.line = element_line(colour = "black"),
-   axis.title.x = element_text(size=15,face="bold", margin = margin(t = 10, r = 0, b =0, l = 0)),
-   axis.text.x = element_text(size=15),
-   axis.title.y = element_text(size=15,face="bold",margin = margin(t = 0, r = 10, b =0, l = 0)),
-   axis.text.y = element_text(size=15),
-   plot.title = element_text(colour="grey20",size=30,vjust=3, hjust = 0.5),
-   plot.margin = unit(c(2, 2, 2, 2), "cm"))
- 
-
-
-head(Enrichment_plot)

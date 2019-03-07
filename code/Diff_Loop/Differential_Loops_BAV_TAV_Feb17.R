@@ -9,9 +9,11 @@ library("edgeR")
                         #sep ="\t", header= FALSE, row.names=1)
 
 
-setwd("/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_callsFeb/Differential_Interaction/")
-counttable= read.table( "Supporting_pairs_count.txt",
-                        sep ="\t", header= TRUE, row.names=1)
+#setwd("/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_callsFeb/Differential_Interaction/")
+
+setwd("/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_callsFeb/backgrdFiles/03_04_19")
+counttable= read.table( "Supporting_pairs_2.txt",
+                        sep ="\t", header= FALSE, row.names=1)
 
 head (counttable)
 colnames(counttable) <- c("TAV_rep1", "TAV_rep2","TAV_rep3","BAV_rep1", "BAV_rep2", "BAV_rep3")
@@ -99,7 +101,7 @@ design.mat
 fit <- glmFit(d2, design.mat)
 lrt12 <- glmLRT(fit, contrast=c(-1,1))
 topTags(lrt12, n=10)
-de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.05, lfc = 2)
+de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.1, lfc = 2)
 #de2 <- decideTestsDGE(lrt12, adjust.method="BH", p.value = 0.1)
 de2tags12 <- rownames(d2) [as.logical(de2)]
 de2tags12_BAV <- rownames(d2) [as.logical(de2==-1)]
