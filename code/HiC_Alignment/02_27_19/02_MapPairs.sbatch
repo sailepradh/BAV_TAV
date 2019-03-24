@@ -1,7 +1,7 @@
 #! /bin/bash -l
 
 #SBATCH -A snic2016-7-108
-#SBATCH -J mapBowtie02_02_27.job
+#SBATCH -J mapBowtie02_03_20.job
 #SBATCH -p node
 #SBATCH -t 1-12:00:00
 #SBATCH --mail-user sailendra.pradhananga@scilifelab.se

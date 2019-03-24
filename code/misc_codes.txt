@@ -1,0 +1,47 @@
+ssh -i /Users/salendrapradh/my_key -vvv  salendra.pradh@saga.scilifelab.se
+
+https://stackoverflow.com/questions/23312047/how-do-i-compile-and-run-gcc-4-9-x
+
+source activate HiCap_test
+
+conda create -n HiCap_test 
+conda install -c bioconda cmake
+ conda install -c psi4 gcc-5ls 
+ 
+conda install -c psi4 gcc-5 cpmd
+
+conda install -c conda-forge/label/gcc7 libstdcxx-ng
+
+
+
+bamCoverage  -b BAV2737acetyl_S10.sort.bam -o BAV2737acetyl_S10.bw --binSize 20 --smoothLength 60 --extendReads 150 --centerReads -p 6 2> BAV2737_bamCoverage.log
+
+idr --samples BAV2737_sorted.bed BAV2742_sorted.bed --input-file-type narrowPeak --rank p.value --output-file BAV-IDR --plot --log-output-file BAV.idr.log 
+
+
+
+
+
+STAR --runThreadN 16 --runMode alignReads --genomeDir star/ --readFilesIn BAV2742smcRNA_S7_R1_001.fastq.gz --readFilesCommand zcat --outFileNamePrefix BAV2742smcRNA --outFilterIntronMotifs RemoveNoncanonical  --quantMode TranscriptomeSAM --sjdbGTFfile  gencode.v26lift37.annotation.gff3  --outSAMtype BAM SortedByCoordinate
+
+mkdir BAV274_RNA_SMC
+mv BAV2742smcRNA* BAV274_RNA_SMC
+
+STAR --runThreadN 16 --runMode alignReads --genomeDir star/ --readFilesIn BAV2764smcRNA_S13_R1_001.fastq.gz  --readFilesCommand zcat --outFileNamePrefix BAV2764smcRNA --outFilterIntronMotifs RemoveNoncanonical  --quantMode TranscriptomeSAM --sjdbGTFfile  gencode.v26lift37.annotation.gff3  --outSAMtype BAM SortedByCoordinate
+
+mkdir BAV2764_RNA_SMC
+mv BAV2764smcRNA* BAV2764_RNA_SMC
+
+STAR --runThreadN 16 --runMode alignReads --genomeDir star/ --readFilesIn TAV2675smcRNA_S10_R1_001.fastq.gz --readFilesCommand zcat --outFileNamePrefix TAV2675smcRNA --outFilterIntronMotifs RemoveNoncanonical  --quantMode TranscriptomeSAM --sjdbGTFfile  gencode.v26lift37.annotation.gff3  --outSAMtype BAM SortedByCoordinate
+
+mkdir TAV2675_RNA_SMC
+mv TAV2675smcRNA* TAV2675_RNA_SMC
+
+STAR --runThreadN 16 --runMode alignReads --genomeDir star/ --readFilesIn TAV2695smcRNA_S11_R1_001.fastq.gz --readFilesCommand zcat --outFileNamePrefix TAV2695smcRNA --outFilterIntronMotifs RemoveNoncanonical  --quantMode TranscriptomeSAM --sjdbGTFfile  gencode.v26lift37.annotation.gff3  --outSAMtype BAM SortedByCoordinate
+
+
+mkdir TAV2695_RNA_SMC
+mv TAV2695smcRNA* TAV2695_RNA_SMC
+
+
+stringtie BAV2714_RNA_EC/BAV2714ecRNAAligned.sortedByCoord.out.bam -p 20 -G gencode.v26lift37.annotation.gff3 -o ballgown/BAV2714_RNA_EC.stringtie.gtf -B -e -A BAV2714_RNA_EC.gene_abund.tab -x chrM,chr
