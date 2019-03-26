@@ -1,0 +1,96 @@
+............................................................................................................................
+........................................Enter your Experiment details.......................................................
+............................................................................................................................
+
+/--The file path to Feature Probe file in gff3 fromat. Required field--/
+Feature Probe File=/crex/proj/sllstore2017025/private/supplementaryFiles/SailDesign/Sail2.hg19.AllProbes.MboI.13.24.02_2017-08-17.gff3
+
+/--The file path to Negative Control Probe file in gff3 fromat. Required if Calculate p_values is Yes. Leave empty otherwise--/
+Negative control Probe File=/crex/proj/sllstore2017025/private/supplementaryFiles/SailDesign/Design6.hg19.NegCtrlProbes.MboI.15.37.32_2017-08-25.1250.gff3
+
+/--The file path to Digested Genome File Name in txt format. If left empty, HiCapTools will generate the Digest file--/
+Digested Genome File=/crex/proj/sllstore2017025/private/supplementaryFiles/Digest_hg19_MboI_None_11-39-03_22-01-2016.txt
+
+/--The cut site motif of the restiction enzyme used to digest the genome in the following format with the cut site indicated by a '^'. X^XXX,EnzymeName. Eg. ^GATC,MboI ; A^AGCTT,HindIII. --/
+/--Required field if Digested Genome File field is left empty--/
+RE cut site motif=^GATC,MboI
+
+/--The genome assembly build version in the format 'buildVersion,source'. Eg. hg19,UCSC --/
+/--Required field if Digested Genome File field is left empty--/
+Genome assembly=hg19,UCSC
+
+/--The path to the fasta file containing the genomic sequence--/
+/--Required field if Digested Genome File field is left empty--/
+Fasta File=
+
+/--The file path to Transcript List File in given fromat. Either Transcript List file or SNV List file is required. Both can be used together--/
+Transcript List File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Sorted_Ref_PC_NC_ENSEMBL_transcript.bed6.sorted.dedup.txt
+
+/--The file path to the SNV List File in BED format. Either Transcript List file or SNV List file is required. Both can be used together--/
+SNV List File=/crex/proj/sllstore2017025/private/supplementaryFiles/Design6/Design6_GWASSNPs6.txt
+
+/--The file path to the Negative Control Region File in BED format from HiCapTools ProbeDesigner. Required if Calculate p_values is Yes--/
+Negative control region File=/crex/proj/sllstore2017025/private/supplementaryFiles/SailDesign/Design6.hg19.AllNegativeControlProbeSequences.MboI.15.37.32_2017-08-25.1250.bed
+
+/--The target tags in the Attribute field with which Probes are annotated in the Probe files. If more than one target term is associated, put on same line separated by commas --/
+Promoters=promoter
+SNVs=SNP
+Negative controls=neg_ctrl
+Other=other
+
+/--The experiment details. Enter the experiment details below. Enter integer for number of experiments--/
+Number of Experiments=9
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/KG2/KG2_LC.trunc.dedup.sorted.bam
+Experiment Name=KG2
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/MG2/MG2_LC.trunc.dedup.sorted.bam
+Experiment Name=MG2
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/CN2/CN2_LC.trunc.dedup.sorted.bam
+Experiment Name=CN2
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/KN2/KN2_LC.trunc.dedup.sorted.bam
+Experiment Name=KN2
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/MC2/MC2_LC.trunc.dedup.sorted.bam
+Experiment Name=MC2
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/CC2/CC2_LC.trunc.dedup.sorted.bam
+Experiment Name=CC2
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/MG1/MG1_LC.trunc.dedup.sorted.bam
+Experiment Name=MG1
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/KC1/KC1_LC.trunc.dedup.sorted.bam
+Experiment Name=KC1
+Probe Design Name=Sail2
+
+/--Experiment Detail fields. --/
+/--Copy, Paste and fill the below 3 fields as many times as there are number of experiments. --/
+Experiment BAM File Name Path=/crex/proj/g2018023/nobackup/private/Lung_cancer_tox/CN1/CN1_LC.trunc.dedup.sorted.bam
+Experiment Name=CN1
+Probe Design Name=Sail2
