@@ -10,16 +10,15 @@ counts_1 <- read.csv("gene_count_matrix.csv",header=TRUE)
 gene_2_ID <- read.csv("sorted_Gene_ID.csv",header=FALSE)
 colnames (counts_1) <- c("Ensembl_ID",
                          "BAV2375_RNA_EC","BAV2424_RNA_EC","BAV2714_RNA_EC",
-                         "BAV2714_RNA_SM","BAV2742_RNA_SM","BAV2764_RNA_SM",
-                         "TAV2431_RNA_EC","TAV2515_RNA_EC","TAV2675_RNA_SM",
-                         "TAV2695_RNA_SM","TAV2709_RNA_EC")
+                         "TAV2431_RNA_EC","TAV2515_RNA_EC","TAV2709_RNA_EC")
 colnames(gene_2_ID) <- c("Ensembl_ID", "Ensembl_ID_Genes_ID")
 Both_combined <- merge (counts_1, gene_2_ID, by = "Ensembl_ID")
-write.table(Both_combined [,c(13,2:12)], "Counts_genes_ID.csv",sep=',',row.names = FALSE, quote = FALSE)
+#write.table(Both_combined [,c(13,2:12)], "Counts_genes_ID.csv",sep=',',row.names = FALSE, quote = FALSE)
 
 
-Counts <- Both_combined [,c(2,3,4,8,9,12)]
-row.names(Counts) <- Both_combined[,13]
+Counts <- Both_combined [,c(2,3,4,5,6,7)]
+head(Counts)
+row.names(Counts) <- Both_combined[,8]
 
 DataGroups <- c ("BAV","BAV","BAV",
                  "TAV","TAV","TAV")
@@ -31,13 +30,20 @@ d.full <- d
 head(d$counts)
 head(cpm(d))
 apply(d$counts, 2, sum)
-keep <- rowSums(cpm(d)>5) >= 2
-d <- d[keep,]
+keep <- rowSums(cpm(d)>10) >= 3
+d <- d[keep, keep.lib.sizes=FALSE]
 dim(d)
+
+AveLogCPM <- aveLogCPM(dgeObj, gene.length = tx_lens)
+hist(AveLogCPM)
 
 d$samples$lib.size <- colSums(d$counts)
 d$samples
-plotMDS(d, col=as.numeric(d$samples$group))
+d <- calcNormFactors(d)
+d
+apply(d$counts, 2, sum)
+
+plotMDS(d, top =500, col=as.numeric(d$samples$group))
 legend("bottomleft", as.character(unique(d$samples$group)), col=1:3, pch=20)
 d1 <- estimateCommonDisp(d, verbose=T)
 names(d1)
