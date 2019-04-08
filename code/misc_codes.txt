@@ -45,3 +45,100 @@ mv TAV2695smcRNA* TAV2695_RNA_SMC
 
 
 stringtie BAV2714_RNA_EC/BAV2714ecRNAAligned.sortedByCoord.out.bam -p 20 -G gencode.v26lift37.annotation.gff3 -o ballgown/BAV2714_RNA_EC.stringtie.gtf -B -e -A BAV2714_RNA_EC.gene_abund.tab -x chrM,chr
+
+
+
+awk -v OFS="\t" '{ if ($11 - $10 <=  6500) print $0}' BAVTAV.Proximities.Probe_Distal_SP4_p01_filtered.txt > BAVTAV.Proximities.Probe_Distal_SP4_p01_Len_6kb_filtered.txt
+
+
+sed '1d' BAVTAV.Proximities.Probe_Distal_SP4_p01_Len_6kb_filtered.txt | awk -v OFS="\t" '{print $9,$10,$11}' |sort -k 1,1 -k2,2n |uniq > sorted_PD_uniq_6kb.bed
+
+
+/path/to/tabix/bgzip myvcf.vcf
+/path/to/tabix/tabix -p vcf myvcf.vcf.gz
+
+
+
+
+BAVTAV.Proximities.Probe_Distal_SP4_p05_filtered.txt --> SP > 4 and p< 0.05 --> 126854
+
+ BAVTAV.Proximities.Probe_Distal_SP4_p05_Len_6kb_filtered.txt --> SP > 4 and p< 0.05 and enahncer length < 6500 -->  112324
+
+BAVTAV.Proximities.Probe_Distal_SP4_p01_filtered.txt   --> SP > 4 and pval < 0.01 -->  65962
+
+
+BAVTAV.Proximities.Probe_Distal_SP4_p01_Len_6kb_filtered.txt  --> SP > 4 and pval < 0.01 and length < 6500 --> 54772 
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -select '! vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o TAV2431_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -select '! vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2431").isHomRef()  && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o TAV2515_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -select '! vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("TAV2431").isHomRef()  && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o TAV2709_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -select '! vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o BAV2424_specific.vcf
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -select '! vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o BAV2375_specific.vcf
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -select '! vc.getGenotype ("BAV2714").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2375").isHomRef()'  -o BAV2714_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta -V raw_var_snp_indel.recalibrated.vcf -select  '! vc.getGenotype ("TAV2431").isHomRef() && ! vc.getGenotype ("TAV2515").isHomRef() && ! vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()' -o TAV_specific.vcf 
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf -select '! vc.getGenotype ("BAV2375").isHomRef() && !vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() &&  vc.getGenotype ("TAV2515").isHomRef() &&  vc.getGenotype ("TAV2709").isHomRef()' -o BAV2375_BAV2424_specific.vcf
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf -select '! vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && !vc.getGenotype ("BAV2714").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() &&  vc.getGenotype ("TAV2515").isHomRef() &&  vc.getGenotype ("TAV2709").isHomRef()' -o BAV2375_BAV2714_specific.vcf
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf -select ' vc.getGenotype ("BAV2375").isHomRef() && ! vc.getGenotype ("BAV2424").isHomRef() && !vc.getGenotype ("BAV2714").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() &&  vc.getGenotype ("TAV2515").isHomRef() &&  vc.getGenotype ("TAV2709").isHomRef()' -o BAV2424_BAV2714_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf -select ' vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef() && ! vc.getGenotype ("TAV2431").isHomRef() &&  ! vc.getGenotype ("TAV2515").isHomRef() &&  vc.getGenotype ("TAV2709").isHomRef()' -o TAV2431_TAV2515_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf -select ' (!vc.getGenotype ("BAV2375").isHomRef()   !vc.getGenotype ("BAV2424").isHomRef() || !vc.getGenotype ("BAV2714").isHomRef() ) && vc.getGenotype ("TAV2431").isHomRef() &&  vc.getGenotype ("TAV2515").isHomRef() &&  vc.getGenotype ("TAV2709").isHomRef()' -o BAV_all_combined.vcf
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants  -R  /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf -select ' (!vc.getGenotype ("TAV2431").isHomRef() ||  !vc.getGenotype ("TAV2515").isHomRef() || !vc.getGenotype ("TAV2709").isHomRef()) && vc.getGenotype ("BAV2375").isHomRef() &&  vc.getGenotype ("BAV2424").isHomRef() &&  vc.getGenotype ("BAV2714").isHomRef()' -o TAV_all_combined.vcf
+
+
+
+### Variant annotor
+
+ java -jar  /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T  VariantAnnotator -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V raw_var_snp_indel.recalibrated.vcf  -o output_2.vcf --resource:SwedFreq anon-SweGen_STR_NSPHS_1000samples_freq_hg19.vcf.gz --expression SwedFreq.AF 
+ 
+ 
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/b37/human_g1k_v37.fasta   -V Annotated_snp_indel.vcf  -select '! vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o TAV2431_specific.vcf
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/b37/human_g1k_v37.fasta  -V Annotated_snp_indel.vcf  -select '! vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2431").isHomRef()  && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o TAV2515_specific.vcf
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/b37/human_g1k_v37.fasta   -V Annotated_snp_indel.vcf -select '! vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("TAV2431").isHomRef()  && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o TAV2709_specific.vcf
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/b37/human_g1k_v37.fasta  -V Annotated_snp_indel.vcf  -select '! vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o BAV2424_specific.vcf
+
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/b37/human_g1k_v37.fasta  -V Annotated_snp_indel.vcf  -select '! vc.getGenotype ("BAV2714").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2375").isHomRef()'  -o BAV2714_specific.vcf
+
+
+
+
+java -jar /sw/apps/bioinfo/GATK/3.8-0/GenomeAnalysisTK.jar -T SelectVariants -R /crex/data/uppnex/reference/biodata/GATK/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta  -V Annotated_snp_indel.vcf  -select '! vc.getGenotype ("BAV2375").isHomRef() && vc.getGenotype ("TAV2431").isHomRef() && vc.getGenotype ("TAV2515").isHomRef() && vc.getGenotype ("TAV2709").isHomRef() && vc.getGenotype ("BAV2424").isHomRef() && vc.getGenotype ("BAV2714").isHomRef()'  -o BAV2375_specific.vcf
+
+
+
+awk -F "\t" -v OFS="\t" < TAV2709_interaction_significant.txt '{print $9,$10,$11}'  |sed '1d' |sort -k 1,1 -k2,2n |uniq > TAV2709_specifc.bed
