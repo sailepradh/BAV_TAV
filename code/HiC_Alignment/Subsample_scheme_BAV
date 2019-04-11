@@ -1,0 +1,29 @@
+#!/bin/bash -l
+
+#SBATCH -A g2018023
+#SBATCH -o TAV_HC_SNP.out
+#SBATCH -e TAV_HC_SNP.err
+#SBATCH -p core -n 8
+#SBATCH -t 10:00:00
+#SBATCH -J subsample_BAV
+#SBATCH --mail-user sailendra.pradhananga@scilifelab.se
+#SBATCH --mail-type=ALL
+
+module load bioinfo-tools
+module load samtools/1.9
+
+#samtools view -@ 8 -s 3.81 -b /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2424/BAV2424.trunc.dedup.sorted.bam  -o BAV2424.trunc_subsampled.bam
+#samtools flagstat BAV2424.trunc_subsampled.bam
+
+#samtools view -@ 8 -s 3.70 -b /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2375/BAV2375.trunc.dedup.sorted.bam   -o BAV2375.trunc_subsampled.bam
+#samtools flagstat  BAV2375.trunc_subsampled.bam
+
+
+samtools view -@ 8 -s 3.97 -b  /crex/proj/sllstore2017025/nobackup/private/TAV/bamfiles/updated/TAV2515/TAV2515.trunc.dedup.sorted.bam -o TAV2431.trunc_subsampled.bam
+samtools flagstat TAV2431.trunc_subsampled.bam
+
+samtools view -@ 8 -s 3.91 -b /crex/proj/sllstore2017025/nobackup/private/TAV/bamfiles/updated/TAV2515/TAV2515.trunc.dedup.sorted.bam  -o TAV2515.trunc_subsampled.bam
+samtools flagstat TAV2431.trunc_subsampled.bam
+
+samtools view -@ 8 -s 3.92 -b //crex/proj/sllstore2017025/nobackup/private/Comparison_BAV_TAV/bamfiles/TAV2709EC/TAV2709EC.trunc.dedup.sorted.bam -o TAV2709.trunc_subsampled.bam
+samtools flagstat TAV2431.trunc_subsampled.bam

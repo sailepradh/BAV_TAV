@@ -1,0 +1,16 @@
+#!/bin/bash -l
+
+#SBATCH -A g2018023
+#SBATCH -o BAV2375_HC_SNP.out
+#SBATCH -e BAV2375_HC_SNP.err
+#SBATCH -p node -n 16
+#SBATCH -t 25:00:00
+#SBATCH -J call_snps_BAV2375
+#SBATCH --mail-user sailendra.pradhananga@scilifelab.se
+#SBATCH --mail-type=ALL
+
+module load bioinfo-tools
+module load samtools/1.9
+
+samtools view -s 3.81 -b /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2424/BAV2424.trunc.dedup.sorted.bam  -o BAV2424.trunc_subsampled.bam
+samtools view -s 3.81 -b /crex/proj/sllstore2017025/nobackup/private/BAV/bamfiles/BAV2375/BAV2375.trunc.dedup.sorted.bam   -o BAV2375.trunc_subsampled.bam
