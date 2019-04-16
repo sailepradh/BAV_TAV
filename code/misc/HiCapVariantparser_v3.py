@@ -7,7 +7,8 @@ Rare variant are 0.5% within a population at the current criteria.
 
 current use:
 python3 ./HiCapVariantparser.py
-/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_march_corrected/test_2500.txt
+/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_march_corrected/BAVTAV.Proximities.Probe_Distal_SP4_p01_either_sample_dist_
+width.txt
 /Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/SNP_calling/Individual_and_combined_VCFs/April_05/Annotated_snp_indel.vcf.gz
 --o /Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_march_corrected/SNP_Interaction.txt
 '''
