@@ -20,7 +20,6 @@ from pysam import VariantFile
 
 pattern = re.compile('SwedFreq.AF')
 
-
 def int2binary(interaction_sample):
     interaction_binary = []
     for int_sta in interaction_sample:
@@ -29,6 +28,24 @@ def int2binary(interaction_sample):
         else:
             interaction_binary.append("0")
     return (interaction_binary)
+
+
+def calmatch(zip_array):
+    count_0 = 0
+    count_1 = 0
+    mismatch_int = 0
+    mismatch_var = 0
+    for a,b in zip_array:
+        if a == '0' and b == '1':
+            mismatch_int = mismatch_int + 1
+        if a == '1'  and b == '0':
+            mismatch_var = mismatch_var + 1
+        if a == '0' and b == '0':
+            count_0 =count_0 + 1
+        if a == '1' and b == '1':
+            count_1 = count_1 + 1
+    count = count_0+count_1
+    return (count0,count_1,mismatch_int,mismatch_var,count)
 
 
 def Main ():
@@ -90,25 +107,7 @@ def Main ():
                 sorted_genotype = [x for _,x in sorted(zip(sample_list,genotype_binary))]
                 zip_array = list(zip (interaction_binary, sorted_genotype))
 
-                count_0 = 0
-                count_1 = 0
-                mismatch_int = 0
-                mismatch_var = 0
-
-                for a,b in zip_array:
-                    if a == '0' and b == '1':
-                        mismatch_int = mismatch_int + 1
-
-                    if a == '1'  and b == '0':
-                        mismatch_var = mismatch_var + 1
-
-                    if a == '0' and b == '0':
-                        count_0 =count_0 + 1
-
-                    if a == '1' and b == '1':
-                        count_1 = count_1 + 1
-
-                count = count_0+count_1
+                count_0,count_1,mismatch_int,mismatch_var,count = calmatch(zip_array)
 
                 if count == 6:
                     allele = "|".join(rec.alleles)
@@ -146,6 +145,7 @@ def Main ():
 
                     with open (args.output, "a") as output_file:
                         output_file.write (combined_result+"\n")
+
 
 if __name__=="__main__":
     Main()
