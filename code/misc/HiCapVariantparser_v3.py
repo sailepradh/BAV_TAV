@@ -225,6 +225,18 @@ def Main ():
                     with open (args.output, "a") as output_file:
                         output_file.write (combined_result+"\n")
 
+                if count_1 == 2 and mismatch_int == 2 and mismatch_var == 2 :
+                    allele = "|".join(rec.alleles)
+                    count_int_allele  = sumarray(zip_array)
+                    changed_freq = "".join(str(x) for x in swed_freq)
+                    unzip_array =  ["|".join(x) for x in zip_array]
+                    snp = (line[8],rec.start,rec.stop,allele,rec.filter.keys()[0])
+                    str_snp = "_".join(str(x) for x in snp)
+                    result = "\t".join(all_fields),str_snp,rec.id,count_int_allele,changed_freq,"\t".join(unzip_array)
+                    combined_result = "\t".join(str(x) for x in result)
+                    with open (args.output, "a") as output_file:
+                        output_file.write (combined_result+"\n")
+
                 ''' for individuals == 5 discordant'''
 
                 if count_1 == 4 and mismatch_int == 1 and mismatch_var == 1 :
