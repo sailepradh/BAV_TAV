@@ -6,10 +6,11 @@ An updated script on variant manipulator from the HiCap data.
 Rare variant are 0.5% within a population at the current criteria.
 
 current use:
-python3 ./HiCapVariantparser.py
-/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_march_corrected/BAVTAV.Proximities.Probe_Distal_SP4_p01_either_sample_dist_
-width.txt
-/Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/SNP_calling/Individual_and_combined_VCFs/April_05/Annotated_snp_indel.vcf.gz
+
+"python3 interactionfile.txt vcf.gz --o SNP_interaction.txt"
+
+python3 ./HiCapVariantparser_v3.py /Volumes/Work_drive/prj/BAV_TAV/data raw_internal/Interaction_march_corrected/BAVTAV.Proximities.Probe_Distal_SP4_p01_either_sample_dist_
+width.txt /Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/SNP_calling/Individual_and_combined_VCFs/April_05/Annotated_snp_indel.vcf.gz
 --o /Volumes/Work_drive/prj/BAV_TAV/data/raw_internal/Interaction_march_corrected/SNP_Interaction.txt
 '''
 
@@ -55,18 +56,26 @@ def sumarray (zip_array):
 
 
 def Main ():
-    parser = argparse.ArgumentParser(description="loading vcf and interaction files")
-    parser.add_argument("interactionfile", help = "Interaction calls from HiCap method")
-    parser.add_argument("vcfile", help = "Variant calls from either HiCap or sequencing samples")
-    parser.add_argument("-o", "--output", help ="output of interaction files", action='store', default=None)
+    parser = argparse.ArgumentParser(
+                                    description="loading vcf and interaction files")
+    parser.add_argument(
+                        "interactionfile",
+                        help = "Interaction calls from HiCap method")
+    parser.add_argument(
+                        "vcfile",
+                        help = "Variant calls from either HiCap or sequencing samples")
+    parser.add_argument(
+                        "-o", "--output",
+                        help ="output of interaction files", action='store', default=None)
+
     args = parser.parse_args()
     Vcfin = VariantFile(args.vcfile)
 
     result_title = ["RefSeqName","TranscriptName","Feature_ID",
-                    "Feature_Chr","Feature_Start","Feature_End",
-                    "Annotation","Strand","Interactor_Chr","Interactor_Start","Interactor_End","Distance",
-                    "SNPs","SNP_ID","Ind_count","Swed_Freq",
-                    "TAV2431","TAV2515","TAV2709","BAV2375","BAV2424","BAV2714"]
+                    "Feature_Chr","Feature_Start","Feature_End","Annotation",
+                    "Strand","Interactor_Chr","Interactor_Start",
+                    "Interactor_End","Distance","SNPs","SNP_ID","Ind_count",
+                    "Swed_Freq","TAV2431","TAV2515","TAV2709","BAV2375","BAV2424","BAV2714"]
 
     with open (args.output, "w") as output_file:
         output_file.write ("\t".join(result_title)+"\n")
@@ -77,6 +86,7 @@ def Main ():
         for line in f:
             line = line.strip().split("\t")
             all_fields = line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11]
+
             chr = ((line[8])[3:],line[9], line[10])
 
             TAV2431 = [line [12],line[13]]
@@ -250,6 +260,7 @@ def Main ():
                     combined_result = "\t".join(str(x) for x in result)
                     with open (args.output, "a") as output_file:
                         output_file.write (combined_result+"\n")
+
 
 
 if __name__=="__main__":
