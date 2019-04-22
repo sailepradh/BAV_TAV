@@ -45,7 +45,7 @@ def int_dict_SP(int_files,expr_genes):
             interaction_genes = fields[0]
             length = abs(int(fields[9])- int(fields[10]))
             interaction_status_SP = results_interaction_SP.get(interaction_genes,[])
-            interaction_status_SP.append( [fields[12], fields[15],field[18],length])
+            interaction_status_SP.append( [fields[12], fields[15],fields[18],length])
             results_interaction_SP[interaction_genes] = interaction_status_SP
         else:
             pass
@@ -105,10 +105,10 @@ def Main():
 
     with open (args.PD, "r") as int_file_PD:
         next(int_file_PD)
-        celltype_SP,replicate1_SP_count_PD,replicate2_SP_count_PD  = int_dict_SP(int_file_PD, common_genes)
-        celltype_CPM_PD = SP_CPM(celltype_SP, replicate1_SP_count_PD, replicate2_SP_count_PD )
+        celltype_SP,replicate1_SP_count_PD,replicate2_SP_count_PD,replicate3_SP_count_PD  = int_dict_SP(int_file_PD, common_genes)
+        celltype_CPM_PD = SP_CPM(celltype_SP, replicate1_SP_count_PD, replicate2_SP_count_PD , replicate3_SP_count_PD)
 
-    print(replicate1_SP_count_PD,replicate2_SP_count_PD)
+    print(replicate1_SP_count_PD,replicate2_SP_count_PD,replicate3_SP_count_PD)
 
 
     if args.output:
