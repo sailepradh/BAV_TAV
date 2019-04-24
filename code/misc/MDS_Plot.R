@@ -42,8 +42,8 @@ plotMDS(d, col=as.numeric(d$samples$group))
 ############################
 ### PCA plot of the above MDS plot
 library(RColorBrewer)
-if(!require(devtools)) install.packages("devtools")
-devtools::install_github("kassambara/factoextra")
+#if(!require(devtools)) install.packages("devtools")
+#devtools::install_github("kassambara/factoextra")
 library(factoextra)
 
 row_sub = apply(counts_SP_BAVTAV[1:6], 1, function(row) all(row !=0 ))
@@ -69,10 +69,12 @@ lab= c("TAV", "TAV", "TAV",
 p = fviz_pca_ind(ir.pca, pointsize = 10,
                  labelsize =10, habillage=lab,
                  mean.point = FALSE, legend.title = "cell type")+
-  labs(title ="lab") + 
+  labs(title ="Biological replicates BAV and TAV") + 
   xlim(-200,200) + ylim (-200, 200)
 
 cols <-  c("#009E73","#0072B2")
+
+pdf("PCA_plot_replicates.pdf", width = 15, height = 15)
 p+ scale_color_manual(values = cols) +
   theme(legend.text=element_text(size=30),
         legend.title = element_text(size=30),
@@ -84,8 +86,9 @@ p+ scale_color_manual(values = cols) +
         axis.text.y = element_text(size=20),
         plot.title = element_text(colour="grey20",size=30,hjust=0.5),
         plot.margin = unit(c(2, 2, 2, 2), "cm"))
-#ggtitle("PD Interactome profile of Unexpressed genes \n in all three cell types and replicates \n")
 dev.off()
+#ggtitle("PD Interactome profile of Unexpressed genes \n in all three cell types and replicates \n")
+#dev.off()
 
 ##########################################################################################
 ## Dendogram and Pearson coefficient calculation
@@ -94,7 +97,6 @@ data=as.matrix(tr)
 head (tr)
 
 dim (tr)
-
 dd <- dist (scale (tr), method = "euclidean")
 hc <- hclust (dd, method = "ward.D2")
 plot(hc)
@@ -109,13 +111,13 @@ plot(hcd,  xlab = "Height",
 
 
 ### Visulization using default theme and theme_dendro()
-install.packages("ggdendro")
+#install.packages("ggdendro")
 
 library(ggplot2)
 library(ggdendro)
 ggdendrogram(hc)
-ggdendrogram(hc, rotate = TRUE, theme_dendro = FALSE)
-
+ggdendrogram(hc, rotate = TRUE, theme_dendro = TRUE)
+ggplot(hc)
 
 ###############################################
 dd <- dist (scale (tr), method = "euclidean")
@@ -124,71 +126,23 @@ clus <- hcluster(dd, method = 'corr')
 ##############################################################################################
 
 library(mvtnorm)
-
-CorrelatedXY <- function (N, mean1, mean2 , variance1, variance2, correlation) {
-                      corvar <- correlation * sqrt(variance1 * variance2)
-                      rmvnorm(n=N,mean=c(mean1,mean2),
-                      sigma=matrix(c(variance1, corvar,
-                      corvar, variance2), 2,2))}
-N <- 1000
-mean1 <- 2
-mean2 <- 5
-variance1 <- 1
-variance2 <- 2
-
-set.seed(17)
-Raw <- CorrelatedXY(N, mean1, mean2, variance1, variance2, 0.0)
-for (i in 1:5)
-{
-  Raw <- cbind(Raw, CorrelatedXY(N, mean1, mean2, 
-                                 variance1, variance2,
-                                 (-1)^i * 0.2*i) )}
-
-colnames(Raw) <- paste(rep(c("P", "P", "M", "M"), 3),
-                      sprintf("%2.2d", c(0,0,2,2,4,4,6,6,8,8,10,10)),
-                       rep( c("A", "B"), 6), sep="")
-round( cor(Raw), 4)      
-corRaw <- cor(Raw)
-install.packages("spatstat")
-library(spatstat)
-plot(im(corRaw[nrow(corRaw):1,]), main="Correlation Matrix Map")
-dissimilarity <- 1 - cor(Raw)
-distance <- as.dist(dissimilarity)
-round(distance, 4) 
-plot(hclust(distance), 
-     main="Dissimilarity = 1 - Correlation", xlab="")
-
-
-
-head (SP_BAV_BAVTAV)
-
-install.packages("psych")
+#nstall.packages("psych")
 library(psych)
 pairs.panels(log_TF[,1:6], 
-             method = "pearson", # correlation method
-             hist.col = "#00AFBB",
-             density = TRUE,  # show density plots
-             ellipses = TRUE # show correlation ellipses
+             method = "pearson",
+             cor.coef = TRUE
+             # correlation method
+             #hist.col = "#00AFBB",
+             #density = TRUE,  # show density plots
+             #ellipses = TRUE # show correlation ellipses
 )
 
 
-if(!require(devtools)) install.packages("devtools")
-devtools::install_github("kassambara/ggpubr")
-library(grid)
-grid.newpage()
-pushViewport(viewport(layout = grid.layout(nrow = 6, ncol = 6)))
-
-
-
-
-
-pl <- lapply(1:11, function(.x) 
-  qplot(1:10, rnorm(10), main=paste("plot", .x)))
-
-
-install.packages("gridExtra")
-library(gridExtra)
+#if(!require(devtools)) install.packages("devtools")
+#devtools::install_github("kassambara/ggpubr")
 library(ggplot2)
+library(ggpubr)
+library(gridExtra)
 
 p <- list()
 for (i in c(1:6)){
@@ -199,10 +153,11 @@ for (i in c(1:6)){
     print (x_name)
     print (y_name)
     
-    p[[i]] <- ggscatter(log_TF, x = x_name, y = y_name,
+    p1 <- ggscatter(log_TF, x = x_name, y = y_name,
                     add = "reg.line" , conf.int =  TRUE, 
                     cor.coef = TRUE, cor.method = "pearson",
                     xlab = x_name , ylab = y_name)
+    print (p1)
   }
 }
 
@@ -210,3 +165,13 @@ grid.arrange(grobs = p[1])
 
 multiplot(plotlist = p,cols = 6)
 grid.arrange(p,ncol=6, nrow = 6)
+
+
+install.packages("ggcorrplot")
+library(ggcorrplot)
+ggcorrplot(log_TF)
+
+
+
+corr <-cor(log_TF[,1:6])
+gcorrplot(corr)
